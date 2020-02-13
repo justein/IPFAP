@@ -1,0 +1,358 @@
+<style>
+    #user-add {
+        padding: 20px 25px 25px 0;
+    }
+    #user-add .layui-treeSelect .ztree li a, .ztree li span {
+        margin: 0 0 2px 3px !important;
+    }
+</style>
+<div class="layui-fluid" id="user-add">
+    <form class="layui-form" action="" lay-filter="user-add-form">
+        <blockquote class="layui-elem-quote layui-text">
+            为方便填写，输入公司名称后点击查询，将自动获取公司信息，填报人员注意核实后继续填写”。
+        </blockquote>
+        <div class="layui-form-item">
+            <label class="layui-form-label febs-form-item-require">申报单位：</label>
+            <div class="layui-input-block">
+                <input type="text" name="username" minlength="2" maxlength="10" lay-verify="range|username"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">统一社会信用代码：</label>
+            <div class="layui-input-block">
+                <input type="tel" name="mobile" lay-verify="phone" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">地址：</label>
+            <div class="layui-input-block">
+                <input type="text" name="addr"  autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">法定代表人</label>
+                <div class="layui-input-inline">
+                    <input type="tel" name="phone" lay-verify="required|phone" autocomplete="off"
+                           class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">法人电话</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="email" lay-verify="email" autocomplete="off"
+                           class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">经办人</label>
+                <div class="layui-input-inline">
+                    <input type="tel" name="phone" lay-verify="required|phone" autocomplete="off"
+                           class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">经办人电话</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="email" lay-verify="email" autocomplete="off"
+                           class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">开户行：</label>
+            <div class="layui-input-block">
+                <input type="text" name="addr"  autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">账号名称：</label>
+            <div class="layui-input-block">
+                <input type="text" name="addr"  autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">银行账号：</label>
+            <div class="layui-input-block">
+                <input type="text" name="addr"  autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label febs-form-item-require">角色：</label>
+            <div class="layui-input-block">
+                <select name="roleId"
+                        lay-verify="required"
+                        xm-select-direction="down"
+                        xm-select="user-add-role"
+                        xm-select-skin="default">
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="console">
+                <div class="layui-form-item">
+                    <a class="layui-btn" onclick="addCustomList('customList')">新增</a>
+                </div>
+            </div>
+
+            <table id="customList" class="layui-table">
+                <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>专利号</th>
+                    <th>专利名称</th>
+                    <th>授权日</th>
+                    <th>资助金额</th>
+                    <th>备注</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>CN12375232.A</td>
+                    <td>一种分布式集群监控的方法</td>
+                    <td>2011-03-23</td>
+                    <td>10000.00</td>
+                    <td></td>
+                    <td>
+                        <a class="layui-btn layui-btn-xs" onclick="delCustomList(this)">删除</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>201710798823.7</td>
+                    <td>使用OpenCL加速的YOLO目标检测方法</td>
+                    <td>2017-09-07</td>
+                    <td>25000.00</td>
+                    <td>实审</td>
+                    <td>
+                        <a class="layui-btn layui-btn-xs" onclick="delCustomList(this)">删除</a>
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+            <div class="layui-form-item">
+                <p>您已录入 2 件专利，合计资助金额35000.00元</p>
+            </div>
+
+            <!--上传附件-->
+            <div class="layui-form-item">
+                        <label class="layui-form-label" style="width: 120px">发明专利证书扉页复印件</label>
+                        <div class="layui-input-block">
+                            <button type="button" class="layui-btn" id="test1">
+                                <i class="layui-icon">&#xe67c;</i>选择图片（最多选择20张，单张图片最大为10M）
+                            </button>
+                            <button type="button" class="layui-btn" id="test9">开始上传</button>
+                        </div>
+                        <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
+                            预览图：
+                            <div class="layui-upload-list" id="demo2"></div>
+                        </blockquote>
+                    </div>
+                
+                <input type="text" id="imgUrls" name="imgUrls" style="display: none;" class="layui-input">
+            <div class="layui-form-item" shiro:hasAnyPermissions="area:ipfunds:audit">
+                <label class="layui-form-label">区县局审核意见</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="sex" value="1" title="通过" checked="">
+                    <input type="radio" name="sex" value="0" title="驳回">
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-text" shiro:hasAnyPermissions="area:ipfunds:audit">
+                <label class="layui-form-label">审核意见</label>
+                <div class="layui-input-block">
+                    <textarea name="text" placeholder="若审核不通过，请输入审核意见" class="layui-textarea"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item febs-hide">
+            <button class="layui-btn" lay-submit="" lay-filter="user-add-form-submit" id="submit"></button>
+            <button type="reset" class="layui-btn" id="reset"></button>
+        </div>
+    </form>
+</div>
+
+<script>
+    layui.use(['febs', 'form', 'formSelects', 'validate', 'treeSelect'], function () {
+        var $ = layui.$,
+            febs = layui.febs,
+            layer = layui.layer,
+            formSelects = layui.formSelects,
+            treeSelect = layui.treeSelect,
+            form = layui.form,
+            $view = $('#user-add'),
+            validate = layui.validate;
+
+        form.verify(validate);
+        form.render();
+
+        formSelects.render();
+
+        treeSelect.render({
+            elem: $view.find('#user-add-dept'),
+            type: 'get',
+            data: ctx + 'dept/select/tree',
+            placeholder: '请选择',
+            search: false
+        });
+
+        formSelects.config('user-add-role', {
+            searchUrl: ctx + 'role',
+            response: {
+                statusCode: 200
+            },
+            beforeSuccess: function (id, url, searchVal, result) {
+                var data = result.data;
+                var tranData = [];
+                for (var i = 0; i < data.length; i++) {
+                    tranData.push({
+                        name: data[i].roleName,
+                        value: data[i].roleId
+                    })
+                }
+                result.data = tranData;
+                return result;
+            },
+            error: function (id, url, searchVal, err) {
+                console.error(err);
+                febs.alert.error('获取角色列表失败');
+            }
+        });
+
+        form.on('submit(user-add-form-submit)', function (data) {
+            febs.post(ctx + 'user', data.field, function () {
+                layer.closeAll();
+                febs.alert.success('新增用户成功，初始密码为 1234qwer');
+                $('#febs-user').find('#query').click();
+            });
+            return false;
+        });
+    });
+
+    //新增
+    function addCustomList(id){
+        var str = '<tr>'+
+            '<td>'+
+            '<select class="newSelectSearch" name="modules" lay-verify="required" lay-search="" lay-filter="selectFilter">'+
+            '<option value="">直接选择或搜索选择</option>'+
+            '</select>'+
+            '</td>'+
+            '<td>'+
+            '<input type="tel" name="phone" lay-verify="required" autocomplete="off" class="layui-input">'+
+            '</td>'+
+            '<td>'+
+            '<input type="tel" name="phone" lay-verify="required" autocomplete="off" class="layui-input">'+
+            '</td>'+
+            '<td>'+
+            '<input type="tel" name="phone" lay-verify="required" autocomplete="off" class="layui-input">'+
+            '</td>'+
+            '<td>'+
+            '<input type="tel" name="phone" lay-verify="required" autocomplete="off" class="layui-input">'+
+            '</td>'+
+            '<td>'+
+            '<input type="tel" name="phone" lay-verify="required" autocomplete="off" class="layui-input">'+
+            '</td>'+
+            '<td>'+
+            '<a class="layui-btn layui-btn-xs" onclick="delCustomList(this)">删除</a>'+
+            '</td>'+
+            '</tr>';
+        $ = layui.jquery
+        $("#"+id).append(str);
+
+        layui.use(['form','laydate'], function() {
+            var form = layui.form;
+            form.render();
+        });
+    }
+
+    //删除
+    function delCustomList(_this){
+        layui.use(['form','laydate'], function() {
+            layer.confirm('确定要删除么？', {
+                btn: ['确定', '取消'] //按钮
+            }, function() {
+                $(_this).parent().parent().remove();
+                layer.msg('删除成功', {
+                    icon: 1
+                });
+            }, function() {
+                layer.msg('取消删除', {
+                    time: 2000 //20s后自动关闭
+                });
+            });
+        });
+    }
+
+    var imgsName="";
+    var success=0;
+    var fail=0;
+    var imgurls="";
+    layui.use(['upload','layer'],function() {
+        var upload = layui.upload;
+        var layer=layui.layer;
+        var $ = layui.jquery
+
+        upload.render({
+            elem: '#test1',
+            url: '/ip/upload',
+            multiple: true,
+            auto:false,
+//			上传的单个图片大小
+            size:10240,
+//			最多上传的数量
+            number:20,
+//			MultipartFile file 对应，layui默认就是file,要改动则相应改动
+            field:'file',
+            bindAction: '#test9',
+            before: function(obj) {
+                //预读本地文件示例，不支持ie8
+                obj.preview(function(index, file, result) {
+                    $('#demo2').append('<img src="' + result
+                        + '" alt="' + file.name
+                        +'"height="92px" width="92px" class="layui-upload-img uploadImgPreView">')
+                });
+            },
+            done: function(res, index, upload) {
+                //每个图片上传结束的回调，成功的话，就把新图片的名字保存起来，作为数据提交
+                console.log(res.code);
+                if(res.code=="1"){
+                    fail++;
+                }else{
+                    success++;
+                    imgurls=imgurls+""+res.data.src+",";
+                    $('#imgUrls').val(imgurls);
+                }
+            },
+            allDone:function(obj){
+                layer.msg("总共要上传图片总数为："+(fail+success)+"\n"
+                    +"其中上传成功图片数为："+success+"\n"
+                    +"其中上传失败图片数为："+fail
+                )
+            }
+        });
+
+    });
+
+    /**
+     * 清空预览的图片及其对应的成功失败数
+     * 原因：如果已经存在预览的图片的话，再次点击上选择图片时，预览图片会不断累加
+     * 表面上做上传成功的个数清0，实际后台已经上传成功保存了的，只是没有使用，以最终商品添加的提交的为准
+      */
+    function cleanImgsPreview(){
+        $("#cleanImgs").click(function(){
+            success=0;
+            fail=0;
+            $('#demo2').html("");
+            $('#imgUrls').val("");
+        });
+    }
+
+
+</script>
