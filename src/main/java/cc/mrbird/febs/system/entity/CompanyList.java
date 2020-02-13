@@ -59,7 +59,6 @@ public class CompanyList {
     private int companyType;
     private String companyOrgType;
     private List<String> labelList;
-    private MatchField matchField;
     private double latitude;
     private double longitude;
     private String legalPersonId;
@@ -391,14 +390,6 @@ public class CompanyList {
      public List<String> getLabelList() {
          return labelList;
      }
-
-    public void setMatchField(MatchField matchField) {
-         this.matchField = matchField;
-     }
-     public MatchField getMatchField() {
-         return matchField;
-     }
-
     public void setLatitude(double latitude) {
          this.latitude = latitude;
      }

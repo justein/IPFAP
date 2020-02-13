@@ -20,11 +20,12 @@ public class HeaderUtils {
         headers.put("Authorization", authorization);
         headers.put("host", "api9.tianyancha.com");
         headers.put("Content-Type", "application/json");
-        headers.put("X-AUTH-TOKEN", "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxODIxMTI0NDg2NiIsImlhdCI6MTU1Nzc0Mzc2NCwiZXhwIjoxNTYwMzM1NzY0fQ.BACR-0C0uRCbINF6Lv-aZ4Tz16TYhxrUyhWZ7D2rm9F4kIkZtwIjqePPj_WXVIhtYDQhkXbtEBaldpq9fnAT-A");
+        headers.put("X-AUTH-TOKEN", "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxNTU4OTk5NDYxOSIsImlhdCI6MTU3NzY4NTE5NiwiZXhwIjoxNTgwMjc3MTk2fQ.2U6O2s5P0LF4-NklMj8iKMQiFmHkFZhNIEz7FYtOeb75D0Ny2zpFDd_ynA4vZiSDuwdDVoNbAdB3PQgep4FalA");
         headers.put("Accept-Encoding", "gzip, deflate");
         headers.put("Accept", "*/*");
         headers.put("version", "TYC-XCX-WX");
-        headers.put("User-Agent", "Mozilla/5.0 (iPhone; CPU iPhone OS 12_1_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/16D57 MicroMessenger/7.0.5(0x17000523) NetType/WIFI Language/zh_CN");
+        headers.put("Referer","https://servicewechat.com/wx9f2867fc22873452/31/page-frame.html");
+        headers.put("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36 MicroMessenger/7.0.4.501 NetType/WIFI MiniProgramEnv/Windows WindowsWechat");
         headers.put("Accept-Language", "zh-cn");
         return headers;
     }

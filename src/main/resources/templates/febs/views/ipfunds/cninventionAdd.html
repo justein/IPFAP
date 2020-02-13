@@ -12,37 +12,38 @@
             为方便填写，输入公司名称后点击查询，将自动获取公司信息，填报人员注意核实后继续填写”。
         </blockquote>
         <div class="layui-form-item">
-            <label class="layui-form-label febs-form-item-require">申报单位：</label>
+            <label class="layui-form-label febs-form-item-require" >申报单位：</label>
             <div class="layui-input-block">
-                <input type="text" name="username" minlength="2" maxlength="10" lay-verify="range|username"
-                       autocomplete="off" class="layui-input">
+                <input type="text" name="username" minlength="2" maxlength="100" lay-verify="range|username"
+                       autocomplete="off" class="layui-input" id="companyNameInput">
             </div>
+            <button type="button" class="layui-btn" id="searchCompanyBtn" onclick="getCompanyInfo()">查询</button>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">统一社会信用代码：</label>
             <div class="layui-input-block">
-                <input type="tel" name="mobile" lay-verify="phone" autocomplete="off" class="layui-input">
+                <input type="tel" name="mobile"  autocomplete="off" class="layui-input" id="standard-creditcode">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">地址：</label>
             <div class="layui-input-block">
-                <input type="text" name="addr"  autocomplete="off" class="layui-input">
+                <input type="text" name="addr"  autocomplete="off" class="layui-input" id="standard-location">
             </div>
         </div>
         <div class="layui-form-item">
             <div class="layui-inline">
                 <label class="layui-form-label">法定代表人</label>
                 <div class="layui-input-inline">
-                    <input type="tel" name="phone" lay-verify="required|phone" autocomplete="off"
-                           class="layui-input">
+                    <input type="tel" name="phone"  autocomplete="off"
+                           class="layui-input" id="standard-legalman">
                 </div>
             </div>
             <div class="layui-inline">
                 <label class="layui-form-label">法人电话</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="email" lay-verify="email" autocomplete="off"
-                           class="layui-input">
+                    <input type="text" name="email"  autocomplete="off"
+                           class="layui-input" id="standard-legalman-phone">
                 </div>
             </div>
         </div>
@@ -50,48 +51,37 @@
             <div class="layui-inline">
                 <label class="layui-form-label">经办人</label>
                 <div class="layui-input-inline">
-                    <input type="tel" name="phone" lay-verify="required|phone" autocomplete="off"
-                           class="layui-input">
+                    <input type="tel" name="phone"  autocomplete="off"
+                           class="layui-input" id="standard-operator">
                 </div>
             </div>
             <div class="layui-inline">
                 <label class="layui-form-label">经办人电话</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="email" lay-verify="email" autocomplete="off"
-                           class="layui-input">
+                    <input type="text" name="email"  autocomplete="off"
+                           class="layui-input" id="standard-operator-phone">
                 </div>
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">开户行：</label>
             <div class="layui-input-block">
-                <input type="text" name="addr"  autocomplete="off" class="layui-input">
+                <input type="text" name="addr"  autocomplete="off" class="layui-input" id="standard-bankname">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">账号名称：</label>
             <div class="layui-input-block">
-                <input type="text" name="addr"  autocomplete="off" class="layui-input">
+                <input type="text" name="addr"  autocomplete="off" class="layui-input" id="standard-accountname">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">银行账号：</label>
             <div class="layui-input-block">
-                <input type="text" name="addr"  autocomplete="off" class="layui-input">
+                <input type="text" name="addr"  autocomplete="off" class="layui-input" id="standard-accountcode">
             </div>
         </div>
 
-        <div class="layui-form-item">
-            <label class="layui-form-label febs-form-item-require">角色：</label>
-            <div class="layui-input-block">
-                <select name="roleId"
-                        lay-verify="required"
-                        xm-select-direction="down"
-                        xm-select="user-add-role"
-                        xm-select-skin="default">
-                </select>
-            </div>
-        </div>
         <div class="layui-form-item">
             <div class="console">
                 <div class="layui-form-item">
@@ -189,7 +179,7 @@
         </div>
 
         <div class="layui-form-item febs-hide">
-            <button class="layui-btn" lay-submit="" lay-filter="user-add-form-submit" id="submit"></button>
+            <button class="layui-btn" lay-submit="" lay-filter="ipfund-add-form-submit" id="submit"></button>
             <button type="reset" class="layui-btn" id="reset"></button>
         </div>
     </form>
@@ -242,11 +232,32 @@
             }
         });
 
-        form.on('submit(user-add-form-submit)', function (data) {
-            febs.post(ctx + 'user', data.field, function () {
+        form.on('submit(ipfund-add-form-submit)', function (data) {
+            var specInfo = {};
+            specInfo.companyName = $("#companyNameInput").val();
+            specInfo.creditCode =  $("#standard-creditcode").val();
+            specInfo.legalman =  $("#standard-legalman").val();
+            specInfo.location =  $("#standard-location").val();
+            specInfo.legalmanPhone =  $("#standard-legalman-phone").val();
+            specInfo.operator =  $("#standard-operator").val();
+            specInfo.operatorPhone =  $("#standard-operator-phone").val();
+            specInfo.bankname =  $("#standard-bankname").val();
+            specInfo.accountname =  $("#standard-accountname").val();
+            specInfo.accountcode =  $("#standard-accountcode").val();
+
+            var set = [];
+            $('#customList tr').each(function() {
+                var row = [];
+                $(this).find('td').each(function() {
+                    row.push($(this).text());
+                });
+                set.push(row);
+            });
+            specInfo.iplist = set;
+            specInfo.imgUrls = imgurls;
+            febs.post(ctx + 'ip/saveInventionIPFunds', {"ipfundsContent":JSON.stringify(specInfo)}, function () {
                 layer.closeAll();
-                febs.alert.success('新增用户成功，初始密码为 1234qwer');
-                $('#febs-user').find('#query').click();
+                febs.alert.success('新增申报成功');
             });
             return false;
         });
@@ -368,6 +379,72 @@
             $('#demo2').html("");
             $('#imgUrls').val("");
         });
+    }
+    
+    function getCompanyInfo() {
+        $ = layui.jquery
+        companyName = $("#companyNameInput").val()
+        $.ajax({
+            url:"/ip/companyInfo",
+            data:{'companyName':companyName},
+            type:"post",
+            dataType:"json",
+            success:function(data){
+                console.log(data);
+                $("#companyNameInput").val(data.object.name);
+                $("#standard-creditcode").val(data.object.creditCode);
+                $("#standard-legalman").val(data.object.legalPersonName);
+                $("#standard-location").val(data.object.regLocation);
+            },
+            error:function(data){
+               console.log("error");
+                layer.msg('查询失败，请自行填写', {
+                    time: 1500 //20s后自动关闭
+                });
+            }
+        })
+    }
+    
+    function saveInventionIPFunds() {
+        var specInfo = {};
+        specInfo.companyName = $("#companyNameInput").val();
+        specInfo.creditCode =  $("#standard-creditcode").val();
+        specInfo.legalman =  $("#standard-legalman").val();
+        specInfo.location =  $("#standard-location").val();
+        specInfo.legalmanPhone =  $("#standard-legalman-phone").val();
+        specInfo.operator =  $("#standard-operator").val();
+        specInfo.operatorPhone =  $("#standard-operator-phone").val();
+        specInfo.bankname =  $("#standard-bankname").val();
+        specInfo.accountname =  $("#standard-accountname").val();
+        specInfo.accountcode =  $("#standard-accountcode").val();
+
+        specInfo.iplist = tabToJSONForJquery("ipList");
+        specInfo.imgUrls = imgurls;
+
+        $.ajax({
+            url:"/ip/saveInventionIPFunds",
+            data:{"ipfundsContent":JSON.stringify(specInfo)},
+            type:"post",
+            dataType:"json",
+            success: function () {
+                console.log(data)
+            },
+            error: function (err) {
+                console.log(err)
+            }
+
+        });
+    }
+
+    function tabToJSONForJquery(id) {
+        var titles = $("#" + id).find("tr:first td");  //获得表头td数组
+        //遍历非表头的，tr、td...拼装json
+        var json = "[" + $("#" + id).find("tr:not(:first)").map(function(i, e) {
+            return "{" + $(e).children("td").map(function(j, el) {
+                return $(el).html();
+            }).get().join(",") + "}";
+        }).get().join(",") + "]";
+        return json;
     }
 
 

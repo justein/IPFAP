@@ -2,6 +2,7 @@ package cc.mrbird.febs.system.service.impl;
 
 import cc.mrbird.febs.common.constant.UrlConstant;
 import cc.mrbird.febs.common.utils.EnumParser;
+import cc.mrbird.febs.common.utils.HeaderUtils;
 import cc.mrbird.febs.common.utils.HttpClientUtils;
 import cc.mrbird.febs.common.utils.JsonUtils;
 import cc.mrbird.febs.system.entity.BaseInfo;
@@ -10,6 +11,7 @@ import cc.mrbird.febs.system.entity.JsonRootBean;
 import cc.mrbird.febs.system.service.IBaseInfoService;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.util.EntityUtils;
+import org.springframework.stereotype.Service;
 
 import java.net.URLEncoder;
 import java.util.Date;
@@ -22,13 +24,10 @@ import java.util.Map;
  * @Date: 2020/2/12 下午6:22
  * @version : V1.0
  */
+@Service
 public class BaseInfoServiceImpl implements IBaseInfoService {
     private String url = UrlConstant.BASE_INFO_URL;
-    private Map<String, String> headers;
-
-    public BaseInfoServiceImpl(Map<String, String> _headers) {
-        this.headers = _headers;
-    }
+    private Map<String, String> headers = HeaderUtils.getHeaders(UrlConstant.AUTHORIZATION);;
 
     @Override
     public BaseInfo getBaseInfoResult(Long companyId) {

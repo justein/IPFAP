@@ -40,6 +40,7 @@ public class Data {
     private String regStatus;
     private String legalPersonName;
     private String legalTitleName;
+    private List<CompanyList> companyList;
     private String baiduAuthURLWWW;
     private String ownId;
     private long legalPersonId;
@@ -56,7 +57,7 @@ public class Data {
     private String weibo;
     private int link;
     private int categoryScore;
-    private int id;
+    private String id;
     private int isMicroEnt;
     private String regNumber;
     private String regCapital;
@@ -74,7 +75,7 @@ public class Data {
     private String companyOrgType;
     private String base;
     private int companyType;
-    private int companyId;
+    private String companyId;
     public void setIsBranch(int isBranch) {
          this.isBranch = isBranch;
      }
@@ -383,12 +384,7 @@ public class Data {
          return categoryScore;
      }
 
-    public void setId(int id) {
-         this.id = id;
-     }
-     public int getId() {
-         return id;
-     }
+
 
     public void setIsMicroEnt(int isMicroEnt) {
          this.isMicroEnt = isMicroEnt;
@@ -509,11 +505,27 @@ public class Data {
          return companyType;
      }
 
-    public void setCompanyId(int companyId) {
-         this.companyId = companyId;
-     }
-     public int getCompanyId() {
-         return companyId;
-     }
+    public String getId() {
+        return id;
+    }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(String companyId) {
+        this.companyId = companyId;
+    }
+
+    public List<CompanyList> getCompanyList() {
+        return companyList;
+    }
+
+    public void setCompanyList(List<CompanyList> companyList) {
+        this.companyList = companyList;
+    }
 }

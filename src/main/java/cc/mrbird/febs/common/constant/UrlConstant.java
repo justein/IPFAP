@@ -19,4 +19,6 @@ public class UrlConstant {
      * 获取企业基本信息
      */
     public static final String BASE_INFO_URL = "https://api9.tianyancha.com/services/v3/t/common/baseinfoV5/";
+
+    public static final String AUTHORIZATION = "0###oo34J0Xt3xFlfrSNTR5NIqOYhvGU###1577685143058###f82c24a531343164619359f33d78914d";
 }

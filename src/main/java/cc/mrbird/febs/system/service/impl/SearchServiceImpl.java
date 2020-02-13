@@ -1,27 +1,16 @@
 package cc.mrbird.febs.system.service.impl;
 
 import cc.mrbird.febs.common.constant.UrlConstant;
-import cc.mrbird.febs.common.utils.EmUtils;
-import cc.mrbird.febs.common.utils.EnumParser;
-import cc.mrbird.febs.common.utils.HttpClientUtils;
-import cc.mrbird.febs.common.utils.JsonUtils;
+import cc.mrbird.febs.common.utils.*;
+import cc.mrbird.febs.system.entity.CompanyList;
 import cc.mrbird.febs.system.entity.Data;
 import cc.mrbird.febs.system.entity.JsonRootBean;
 import cc.mrbird.febs.system.entity.Search;
 import cc.mrbird.febs.system.service.ICompanySearchService;
-import cn.xiaoyanol.crawler.constant.UrlConstant;
-import cn.xiaoyanol.crawler.domain.search.CompanyList;
-import cn.xiaoyanol.crawler.domain.search.Data;
-import cn.xiaoyanol.crawler.domain.search.JsonRootBean;
-import cn.xiaoyanol.crawler.domain.search.Search;
-import cn.xiaoyanol.crawler.service.ISearchService;
-import cn.xiaoyanol.crawler.utils.EmUtils;
-import cn.xiaoyanol.crawler.utils.EnumParser;
-import cn.xiaoyanol.crawler.utils.HttpClientUtils;
-import cn.xiaoyanol.crawler.utils.JsonUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.util.EntityUtils;
+import org.springframework.stereotype.Service;
 
 import java.lang.reflect.InvocationTargetException;
 import java.net.URLEncoder;
@@ -35,18 +24,15 @@ import java.util.*;
  * @Date: 2018-11-23
  * @Time: 下午6:34
  */
+@Service
 public class SearchServiceImpl implements ICompanySearchService {
 
     private String url = UrlConstant.SEARCH_RUL;
-    private Map<String, String> headers;
+    private Map<String, String> headers = HeaderUtils.getHeaders(UrlConstant.AUTHORIZATION);
 
     private  final String DEFAULT_PAGE_NUM = "1";
     private  final String DEFAULT_PAGE_SIZE = "10";
     private  final String DEFAULT_SORT_TYPE = "0";
-
-    public SearchServiceImpl(Map<String, String> _headers) {
-        this.headers = _headers;
-    }
 
     @Override
     public List<Search> getSearchResult(String companyName, String pageNum, String pageSize, String sortType) {
@@ -70,6 +56,8 @@ public class SearchServiceImpl implements ICompanySearchService {
 
             List<Search> searches = new ArrayList<>();
             for (CompanyList company : companyList) {
+                /**只查询在业状态的公司*/
+                if (!"在业".equals(company.getRegStatus())) continue;
                 Search search = new Search();
                 search.setId(company.getId());
                 search.setRegCapital(company.getRegCapital());

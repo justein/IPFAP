@@ -41,8 +41,9 @@ public class JsonUtils {
     public static <T> T convertValue(String content, Class<T> clazz) {
         try {
             return objectMapper.readValue(content, clazz);
-        } catch (IOException var3) {
-            throw new RuntimeException(var3);
+        } catch (Exception var3) {
+           var3.printStackTrace();
+           return null;
         }
     }
 }
